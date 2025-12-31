@@ -3,6 +3,7 @@
 const btnGet = document.getElementById('fetch-btn-get');
 const btnPost = document.getElementById('fetch-btn-post');
 const display = document.getElementById('result-display');
+const clearBtn = document.getElementById('clear-btn');
 
 
 
@@ -78,4 +79,14 @@ async function loadData(){
 // 4. 버튼에 '클릭' 사건( Event ) 이 발생하면 loadData 함수를 실행하라고 명령한다.
 btnGet.addEventListener('click',loadData);
 
-// createPost();
+
+
+// 데이터 지우기 함수
+// 데이터를 지우는 것은 서버와 통신할 필요가 없으므로 간단하다 !
+function clearData() {
+  // 결과창의 텍스트를 초기 상태로 되돌린다.
+  // display.innerText = "데이터가 삭제되었습니다. 다시 버튼을 눌러주세요.";
+  display.innerText = "";
+}
+
+clearBtn.addEventListener('click', clearData); // 지우기 버튼에 함수 연결
