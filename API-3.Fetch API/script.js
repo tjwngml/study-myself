@@ -1,4 +1,13 @@
-async function createPost() { // 비동기로 함수 작성
+
+// 버튼과 결과창 요소를 변수에 담는다.
+const btnGet = document.getElementById('fetch-btn-get');
+const btnPost = document.getElementById('fetch-btn-post');
+const display = document.getElementById('result-display');
+
+
+
+
+async function createPost() { // 비동기로 함수 작성 - 데이터를 보내는 함수
   const url = 'https://jsonplaceholder.typicode.com/posts';
 
   // 1. 서버에 보낼 데이터 객체 ( Payload )
@@ -44,4 +53,29 @@ async function createPost() { // 비동기로 함수 작성
   }
 }
 
-createPost();
+btnPost.addEventListener('click',createPost);
+
+
+async function loadData(){
+    try {
+      display.innerText = "로딩 중..."; // display의 기존 내용을 모두 지우고 해당 텍스트로 교체
+
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+
+      if (!response.ok) throw new Error("데이터를 가져오지 못했습니다.");
+
+      const data = await response.json();
+
+      // 3. 가져온 데이터를 화면에 뿌려준다.
+      display.innerText = JSON.stringify(data, null, 2);
+
+    } catch(error) {
+        display.innerText = "에러 발생: " + error.message;
+    }
+
+  }
+  
+// 4. 버튼에 '클릭' 사건( Event ) 이 발생하면 loadData 함수를 실행하라고 명령한다.
+btnGet.addEventListener('click',loadData);
+
+// createPost();
